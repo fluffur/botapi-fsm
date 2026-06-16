@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+
+	"github.com/redis/go-redis/v9"
 )
 
 // RedisBytesStore persists FSM payloads in Redis.

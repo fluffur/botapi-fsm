@@ -4,9 +4,8 @@ import (
 	"context"
 	"testing"
 
+	fsm "github.com/fluffur/botapi-fsm"
 	"github.com/gotd/botapi"
-
-	"activity-bot/fsm"
 )
 
 type step string

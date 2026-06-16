@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"activity-bot/fsm"
+	fsm "github.com/fluffur/botapi-fsm"
 )
 
 type mapBytesStore struct {
