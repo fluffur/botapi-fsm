@@ -1,4 +1,4 @@
-// Package fsm provides a finite-state machine layer for github.com/gotd/botapi.
+// Package botapi_fsm provides a finite-state machine layer for github.com/gotd/botapi.
 //
 // It is storage-agnostic: bring your own [Store] (memory, Redis, Postgres, …)
 // or use [NewMemory] for a process-local machine. State and payload types are
