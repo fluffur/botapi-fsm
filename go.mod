@@ -2,6 +2,9 @@ module github.com/fluffur/botapi-fsm
 
 go 1.26
 
+replace github.com/gotd/botapi v0.2.1-0.20260619180154-ec97c6a751b3 => github.com/fluffur/botapi v0.0.0-20260629051251-932de80d62b8
+
+
 require (
 	github.com/gotd/botapi v0.2.1-0.20260622211259-fbef619ad792
 	github.com/redis/go-redis/v9 v9.20.1
