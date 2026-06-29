@@ -6,7 +6,7 @@ replace github.com/gotd/botapi v0.2.1-0.20260619180154-ec97c6a751b3 => github.co
 
 
 require (
-	github.com/gotd/botapi v0.2.1-0.20260622211259-fbef619ad792
+	github.com/gotd/botapi v0.2.1-0.20260619180154-ec97c6a751b3
 	github.com/redis/go-redis/v9 v9.20.1
 )
 
