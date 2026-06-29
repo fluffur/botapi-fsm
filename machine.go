@@ -109,8 +109,8 @@ func (m *Machine[S, D]) Middleware() botapi.Middleware {
 
 // Active is a predicate that matches updates for users currently inside the FSM.
 func (m *Machine[S, D]) Active() botapi.Predicate {
-	return func(u *botapi.Update) bool {
-		key, ok := m.updateKey(u)
+	return func(c *botapi.Context) bool {
+		key, ok := m.updateKey(c.Update)
 		if !ok {
 			return false
 		}
@@ -126,8 +126,8 @@ func (m *Machine[S, D]) InState(states ...S) botapi.Predicate {
 		set[s] = struct{}{}
 	}
 
-	return func(u *botapi.Update) bool {
-		key, ok := m.updateKey(u)
+	return func(c *botapi.Context) bool {
+		key, ok := m.updateKey(c.Update)
 		if !ok {
 			return false
 		}
