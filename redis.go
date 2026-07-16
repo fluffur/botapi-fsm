@@ -69,3 +69,33 @@ func MustPingRedis(ctx context.Context, client redis.Cmdable) error {
 	}
 	return nil
 }
+
+func NewRedisFSM[S ~string, D any](
+	client redis.UniversalClient,
+	prefix string,
+	expiration time.Duration,
+	idleState S,
+	opts ...Option[S, D],
+) *Machine[S, D] {
+	store := NewRedisJSONStore[S, D](client, prefix, expiration)
+
+	defaultOpts := []Option[S, D]{
+		WithKeyFunc[S, D](ChatSenderKey),
+		WithUpdateKeyFunc[S, D](ChatSenderUpdateKey),
+	}
+
+	finalOpts := append(defaultOpts, opts...)
+
+	return New[S, D](
+		store,
+		idleState,
+		finalOpts...,
+	)
+}
+
+func WithStrategy[S ~string, D any](strat KeyStrategy) Option[S, D] {
+	return func(m *Machine[S, D]) {
+		m.key = strat.Key
+		m.updateKey = strat.UpdateKey
+	}
+}
