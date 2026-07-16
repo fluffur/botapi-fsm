@@ -146,6 +146,24 @@ func (m *Machine[S, D]) Mount(bot *botapi.Bot, predicates ...botapi.Predicate) {
 	m.mount(bot.OnMessage, bot.OnCallbackQuery, bot.OnCommand, predicates...)
 }
 
+func (m *Machine[S, D]) State(state S) botapi.Predicate {
+	return func(c *botapi.Context) bool {
+		key, ok := m.updateKey(c.Update)
+		if !ok {
+			return false
+		}
+		sess, ok := m.cache.peek(key)
+		if !ok {
+			var err error
+			sess, ok, err = m.load(c, key)
+			if err != nil || !ok {
+				return false
+			}
+		}
+		return sess.State == state
+	}
+}
+
 // MountGroup registers FSM handlers on a handler group.
 func (m *Machine[S, D]) MountGroup(g *botapi.Group, predicates ...botapi.Predicate) {
 	m.mount(g.OnMessage, g.OnCallbackQuery, g.OnCommand, predicates...)
