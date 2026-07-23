@@ -235,6 +235,20 @@ func (m *Machine[S, D]) Get(c *botapi.Context) (Session[S, D], bool, error) {
 	return m.load(c, key)
 }
 
+func (m *Machine[S, D]) GetByKey(
+	ctx context.Context,
+	key int64,
+) (Session[S, D], bool, error) {
+	return m.load(ctx, key)
+}
+
+func (m *Machine[S, D]) ClearByKey(
+	ctx context.Context,
+	key int64,
+) error {
+	return m.clear(ctx, key)
+}
+
 // Clear removes the session for the context's key.
 func (m *Machine[S, D]) Clear(c *botapi.Context) error {
 	key, ok := m.sessionKey(c)
